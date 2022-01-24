@@ -1,2 +1,2 @@
-t="Conver to Black & White",bg="lightgray",fg="black")
-BW.grid(row=0, column=0)
+img = ImageTk.PhotoImage(im)
+img =Label(image=img).place(x=400,y=150)
