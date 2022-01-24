@@ -1,26 +1,28 @@
 from tkinter import *
 class buttons :
-    def __init__(self,my_canvas):
-      self.BW = Button(my_canvas, text="Conver to Black & White", bg = "yellow", fg = "black")
+    def __init__(self,my_canvas,crop,select_crop,flip_hori,flip_vert,BnW,Saturation):
+      self.BW = Button(my_canvas, text="Conver to Black & White", bg = "yellow", fg = "black",command = BnW)
       self.BW.grid(row=0, column=0,padx=2,pady=5)
       ##
       
-      self.crop = Button(my_canvas, text="Apply Crop",bg="yellow",fg="black") 
-      self.select_crop = Button(my_canvas, text="Selct Area",bg="yellow",fg="black")
+      self.crop = Button(my_canvas, text="Apply Crop",bg="yellow",fg="black",command = crop) 
+      self.select_crop = Button(my_canvas, text="Selct Area",bg="yellow",fg="black",command = select_crop)
       
       self.crop.grid(row=1,column=0,padx=2,pady=5)
       self.select_crop.grid(row=1,column=1,padx=2,pady=5)
       ##
-      self.flip_hori = Button(my_canvas, text="Flip Horizantal",bg="yellow",fg="black")
-      self.flip_vert = Button(my_canvas, text="Flip Vertically",bg="yellow",fg="black")
+      self.flip_hori = Button(my_canvas, text="Flip Horizantal",bg="yellow",fg="black",command = flip_hori)
+      self.flip_vert = Button(my_canvas, text="Flip Vertically",bg="yellow",fg="black",command = flip_vert)
       
       self.flip_hori.grid(row=2,column=0,padx=2,pady=5)
       self.flip_vert.grid(row=3,column=0,padx=2,pady=5)
       ##
       
-      self.satu = Button(my_canvas, text="Apply Saturation",bg="yellow",fg="black")
-      self.satu_in = Scale(my_canvas, from_= 0 , to=100, orient = 'horizontal',bg="yellow",fg="black")
-      
+      global a
+      self.satu = Button(my_canvas, text="Apply Saturation",bg="yellow",fg="black",command = Saturation)
+      self.satu_in = Scale(my_canvas, from_= -100 , to=100, orient = 'horizontal',bg="yellow",fg="black")
+      a = self.satu_in.get()      
+
       self.satu.grid(row=4,column=0,padx=2,pady=5)
       self.satu_in.grid(row=4,column=1,padx=2,pady=5)
       ##
@@ -35,6 +37,7 @@ class buttons :
       
       self.cont = Button(my_canvas, text="Apply Contrast",bg="yellow",fg="black")
       self.cont_in = Scale(my_canvas, from_= 0 , to=100, orient = 'horizontal',bg="yellow",fg="black")
+      # self.cont_in.get()
       
       
       self.cont.grid(row=6,column=0,padx=2,pady=5)
