@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
 from tkinter import *
+from tkinter import colorchooser
 from tkinter.messagebox import askyesno
 from PIL import Image,ImageTk,ImageEnhance
 # from tkinter import Image
@@ -7,11 +8,10 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter.filedialog import askopenfile
 from buttons import buttons
-
 import ctypes
 import colorsys
 import cv2
-
+from tkinter.colorchooser import askcolor
 
 
 
@@ -109,12 +109,12 @@ my_canvas.place(x=0,y=30)
 
 
 def Sat_in(self):
-  global im,new,label,im_g,img
+  global im,new,label,im_g,img,temp_g
   global a
   filter = ImageEnhance.Color(im)
   a = satu_scale.get()
-  img = filter.enhance(a)
-  im_g = img.resize((1200,780))
+  temp_g = filter.enhance(a)
+  im_g = temp_g.resize((1200,780))
   new = ImageTk.PhotoImage(im_g)
   label.configure(image=new)
 
@@ -207,10 +207,12 @@ cont_scale.grid(row=6,column=1,padx=2,pady=5)
 
 def Expo_in(event):
   global im,new,label,im_g,img
-  global a
-  a = satu_scale.get()
+  global b
+#   for a in range(0,cont_scale.get()+1):
+  b = satu_scale.get()
+
   filter = ImageEnhance.Brightness(im)
-  img = filter.enhance(a)
+  img = filter.enhance(b)
   im_g = img.resize((1200,780))
   new = ImageTk.PhotoImage(im_g)
   label.configure(image=new)
@@ -238,8 +240,26 @@ expo_scale.grid(row=7,column=1,padx=2,pady=5)
 # -----------------------------------------------------------------------------------------------------
 
 
+def savefile():
+    global file,im,fp,rgba
+    rgba = im.convert('RGB')
+    # file=filedialog.asksaveasfile(mode='w',filetypes=(("png files","*.png"),("jpg files","*.jpg")))
+    fp = filedialog.asksaveasfilename()
+    print(str(fp))
+    # type(file)
+    if fp:
+        rgba.save(str(fp)+'.jpg')
 
-save = Button(root,text="Save" , bg = "white")
+    
+    # im.save('demo.png')
+
+def highlight():
+    global colors,border,label
+    colors = colorchooser.askcolor(title="Tkinter Color Chooser")
+    label.configure(highlightbackground = colors, highlightthickness = 1)
+    
+
+save = Button(root,text="Save" , bg = "white",command=savefile)
 save.grid(row=0,column=0,padx=2,pady=2,ipadx=10)
 
 
@@ -248,7 +268,7 @@ open.grid(row=0,column=1,padx=2,pady=2,ipadx=10)
 
 #helllo hhhh
 
-buttons(my_canvas,crop,select_crop,flip_hori,flip_vert,BnW,Saturation,sharp,cont,expo)
+buttons(my_canvas,crop,select_crop,flip_hori,flip_vert,BnW,Saturation,sharp,cont,expo,highlight)
 
 
 

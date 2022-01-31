@@ -1,6 +1,6 @@
 from tkinter import *
 class buttons :
-    def __init__(self,my_canvas,crop,select_crop,flip_hori,flip_vert,BnW,Saturation,sharp,cont,expo):
+    def __init__(self,my_canvas,crop,select_crop,flip_hori,flip_vert,BnW,Saturation,sharp,cont,expo,highlight):
       self.BW = Button(my_canvas, text="Conver to Black & White", bg = "yellow", fg = "black",command = BnW)
       self.BW.grid(row=0, column=0,padx=2,pady=5)
       ##
@@ -51,7 +51,7 @@ class buttons :
       self.expo.grid(row=7,column=0,padx=2,pady=5)
       # self.expo_in.grid(row=7,column=1,padx=2,pady=5)
       
-      self.highlight = Button(my_canvas, text="Highlight Border",bg="yellow",fg="black")
+      self.highlight = Button(my_canvas, text="Highlight Border",bg="yellow",fg="black",command= highlight)
       self.highlight.grid(row=8,column=0,padx=2,pady=5)
       
       
